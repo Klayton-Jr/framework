@@ -1,19 +1,22 @@
 package com.br.framework.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "userCustom")
+@NoArgsConstructor
 public class UserCustom implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(unique = true)
     private String username;
@@ -25,13 +28,13 @@ public class UserCustom implements UserDetails {
     }
 
     @OneToMany(mappedBy = "userCustom")
-    private Set<Post> posts;
+    private Set<Post> posts = new HashSet<>();
 
     @OneToMany(mappedBy = "userCustom")
-    private Set<Photo> photos;
+    private Set<Photo> photos = new HashSet<>();
 
     @OneToMany(mappedBy = "userCustom")
-    private Set<Comment> comments;
+    private Set<Comment> comments = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

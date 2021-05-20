@@ -10,5 +10,5 @@ import java.util.Set;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     Optional<Comment> findByUserCustom(UserCustom userCustom);
-    Optional<Set<Comment>> findCommentsByPosts(Set<Post> posts);
+    Optional<Set<Comment>> findCommentsByPostsIn(Set<Post> posts);
 }
