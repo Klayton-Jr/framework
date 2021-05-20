@@ -46,9 +46,9 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getPostById(@PathVariable String id) {
-        Post post = postRepository.findWithComments(Long.valueOf(id));
+        Optional<Post> post = postRepository.findWithComments(Long.valueOf(id));
 
-        if (post == null) {
+        if (!post.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("Mensagem", String.format("Não foi encontrado nenhum post com o id (%s)", id)));
         }
         return ResponseEntity.ok(post);

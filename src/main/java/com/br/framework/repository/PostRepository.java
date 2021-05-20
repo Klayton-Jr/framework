@@ -12,5 +12,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Optional<Post> findByUserCustom(UserCustom userCustom);
 
     @Query("from Post post join fetch post.comments where post.id = :id")
-    Post findWithComments(@Param("id") Long id);
+    Optional<Post> findWithComments(@Param("id") Long id);
 }
